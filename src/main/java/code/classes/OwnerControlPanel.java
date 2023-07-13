@@ -124,7 +124,7 @@ public class OwnerControlPanel {
         } else {
 
             logger.info("number of bathrooms= " + hf.getNo_bathrooms() + "\n" + "number of bedrooms= " + hf.getNo_bedrooms() + "\n there's a balcony: "+hf.getBalcony()+"\n");
-            logger.info("TenantName \t contactInfo\n");
+            logger.info("Tenants of this apartment:\n TenantName \t contactInfo\n");
 
             try {
                 Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sakancom", "root", "memesa32002@");

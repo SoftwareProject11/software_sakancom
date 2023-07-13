@@ -10,10 +10,22 @@ public class Login {
 
     private static Logger logger = Logger.getLogger(Login.class.getName());
     public boolean isLoggedin;
+    private int ownerID;
+    private String ownerName;
 
     public Login() {
         this.isLoggedin = false;
     }
+
+    public int getOwnerID() {
+        return ownerID;
+    }
+
+    public String getOwnerName() {
+        return ownerName;
+    }
+
+
 
     public boolean isLoggedIn() {
         return isLoggedin;
@@ -60,6 +72,8 @@ public class Login {
                 while (resOwner.next()){
                     if(resOwner.getString("username").equals(username) && resOwner.getString("password").equals(password) && user_choice.equals("3"))
                     {
+                        ownerID=resOwner.getInt("idowner");
+                        ownerName=resOwner.getString("name");
                         login();
                         logger.info("logged in successfully");
                         break;
@@ -75,6 +89,6 @@ public class Login {
     }
 
     public void reasonFalseLogin() {
-        logger.info("The username or password or the choice is not correct");
+        logger.info("The username or password is not correct");
     }
 }

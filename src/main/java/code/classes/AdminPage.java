@@ -72,7 +72,7 @@ public class AdminPage {
     }
 
     private static void displayReservation(Tenant t) {
-        logger.info(t.getId_house()+"\t"+t.getId_apart()+"\t"+t.getIdtenant()+"\t"+t.getName()+"\t 0"+t.getPhone()+","+t.getEmail()+"\n");
+        logger.info(t.getId_house()+"\t\t\t"+t.getId_apart()+"\t\t"+t.getIdtenant()+"\t"+t.getName()+"\t\t 0"+t.getPhone()+","+t.getEmail()+"\n");
     }
 
     public static void displayReservations(List<Tenant> tenant) {
@@ -86,7 +86,7 @@ public class AdminPage {
             Statement stmt = con.createStatement();
             ResultSet result = stmt.executeQuery("select idhouse from house where no_tenant=0");
             while (result.next()) {
-                logger.info(result.getInt("idhouse")+"\tـــ\t"+"\tـــ\t"+"\tـــ\t"+"\tـــ");
+                logger.info(result.getInt("idhouse")+"\t\tـــ\t\t"+"\t\tـــ\t\t"+"\t\tـــ\t\t"+"\tـــ");
             }
 
         } catch (Exception e) {

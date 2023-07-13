@@ -12,7 +12,7 @@ public class AddAdvertisement {
     Double rent,price;
 
     static boolean validH=false;
-    private  Logger logger = Logger.getLogger(Login.class.getName());
+    private static Logger logger = Logger.getLogger(Login.class.getName());
 
 
     public AddAdvertisement(Integer id_house, String photos, String ownerName, String ownerContactInfo, String location, String services, Double rent,String rentNote,  Double price) {
@@ -66,9 +66,8 @@ public class AddAdvertisement {
     }
 
 
-    public static void validHouse(){
-        validH=true;
-    }
+    public static boolean isDuplicateHouse=false;
+
 
     public static boolean isValidHouse() {
         return validH;
@@ -86,6 +85,7 @@ public class AddAdvertisement {
                 if(adv.getId_house()==result1.getInt("idhouse_adv")){
                     flag=false;
                     validH=false;
+                    isDuplicateHouse=true;
                     break;
                 }
             }
@@ -94,6 +94,7 @@ public class AddAdvertisement {
                 while (result2.next()) {
                     if(adv.getId_house()==result2.getInt("idhouse")){
                         flag2=true;
+                        isDuplicateHouse=false;
                         break;
                     }
                 }
@@ -103,6 +104,8 @@ public class AddAdvertisement {
                 String insertStmt = "insert into owner_advertisements values('" + adv.getId_house() + "','" + adv.getPhotos() + "','" + adv.getOwnerName() + "','" + adv.getOwnerContactInfo() +
                         "',  '" + adv.getLocation() +"','" + adv.getServices()+"'," + adv.getRent() + ",'" + adv.getRentNote() + "' ,'" + adv.getPrice() + "','no')";
                 stmt1.executeUpdate(insertStmt);
+                validH=true;
+                logger.info("The advertisement is added, but waiting Administrator to accept it ");
 //                validHouse();
             }
 
@@ -112,15 +115,6 @@ public class AddAdvertisement {
         }catch (Exception e){
             e.printStackTrace();
         }
-
-
-
-
-
-
-
-
-
 
     }
 

@@ -138,6 +138,8 @@ public class House {
             if(!house.findHouseId(house.getId())){
                 stmt.executeUpdate(insertHouse);
                 logger.info("House added successfully");
+            }else {
+                logger.info("this id is already exist, please enter another id: ");
             }
 
             con.close();
@@ -151,10 +153,9 @@ public class House {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sakancom", "root", "memesa32002@");
             Statement stmt = con.createStatement();
             String insertHouseInfo="INSERT INTO house_floor VALUES('"+housef.getId_house()+"','"+housef.getId_floor()+"','"+housef.getId_apart()+"','"+housef.getNo_bathrooms()+"','"+housef.getNo_bedrooms()+"','"+housef.getBalcony()+"')";
-            if(!HouseFloor.findHouseFloorId(housef.getId_house())){
-                stmt.executeUpdate(insertHouseInfo);
-                logger.info("House's Information added successfully");
-            }
+            stmt.executeUpdate(insertHouseInfo);
+            logger.info("House's Information added successfully");
+
             con.close();
 
         } catch (Exception e) {
