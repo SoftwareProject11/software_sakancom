@@ -102,7 +102,7 @@ public class AddAdvertisement {
 
             if(flag && flag2){
                 String insertStmt = "insert into owner_advertisements values('" + adv.getId_house() + "','" + adv.getPhotos() + "','" + adv.getOwnerName() + "','" + adv.getOwnerContactInfo() +
-                        "',  '" + adv.getLocation() +"','" + adv.getServices()+"'," + adv.getRent() + ",'" + adv.getRentNote() + "' ,'" + adv.getPrice() + "','no')";
+                        "',  '" + adv.getLocation() +"','" + adv.getServices()+"'," + adv.getRent() + ",'" + adv.getRentNote() + "' ,'" + adv.getPrice() + "','no','')";
                 stmt1.executeUpdate(insertStmt);
                 validH=true;
                 logger.info("The advertisement is added, but waiting Administrator to accept it ");

@@ -168,7 +168,7 @@ public class House {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sakancom", "root", "memesa32002@");
             Statement stmt = con.createStatement();
 
-//            if(House.findHouseId(house_id)){
+            if(House.findHouseId(house_id)){
                 if(attribute.equalsIgnoreCase("services")){
                     String updateServices="UPDATE house SET services='"+value+"' WHERE idhouse='"+house_id+"'";
                     stmt.executeUpdate(updateServices);
@@ -181,7 +181,7 @@ public class House {
                     String updateOwnerId="UPDATE owner SET idowner='"+value+"' WHERE idowner=(select id_owner from house where idhouse='"+house_id+"')";
                     stmt.executeUpdate(updateOwnerId);
                 }
-//            }
+          }
             con.close();
 
 
@@ -195,7 +195,7 @@ public class House {
     }
 
     public void unupdatedMsg() {
-        logger.info(" Information didn't Updated, since houseId doesn't exist ");
+        logger.info(" Information will not Updated, since houseId doesn't exist ");
     }
 
 

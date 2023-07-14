@@ -4,8 +4,11 @@ import code.classes.AddAdvertisement;
 import code.classes.AdminPage;
 import code.classes.Login;
 import code.classes.OwnerControlPanel;
-
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
 import java.io.Console;
+import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -21,30 +24,42 @@ public class Main {
     private static final String IN_VALID_INPUT = "Please enter valid input";
     private static final String BACK = "3- Back";
 
-    public static void displayHouses(int ownerID){
+    public static void displayHouses(int ownerID) {
         try {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sakancom", "root", "memesa32002@");
             Statement stmt = con.createStatement();
-            ResultSet result = stmt.executeQuery("select * from house where id_owner='"+ownerID+"'");
+            ResultSet result = stmt.executeQuery("select * from house where id_owner='" + ownerID + "'");
             logger.info("idHouse\t location\t\t services\t\t price");
             while (result.next()) {
-                logger.info(result.getInt("idhouse")+"\t"+result.getString("location")+"\t\t"+result.getString("services")+"\t\t"+ result.getDouble("price")+" JD");
+                logger.info(result.getInt("idhouse") + "\t" + result.getString("location") + "\t\t" + result.getString("services") + "\t\t" + result.getDouble("price") + " JD");
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
-
-
     }
-    public static void main(String[] args) {
+        public static void displayAllHouses(){
+            try {
+                Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sakancom", "root", "memesa32002@");
+                Statement stmt = con.createStatement();
+                ResultSet result = stmt.executeQuery("select * from house");
+                logger.info("All houses in the system: ");
+                logger.info("idHouse\t location\t\t services\t\t price\t\t idOwner");
+                while (result.next()) {
+                    logger.info(result.getInt("idhouse")+"\t"+result.getString("location")+"\t"+result.getString("services")+"\t"+ result.getDouble("price")+" JD\t"+ result.getInt("id_owner"));
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+    }
+    public static void main(String[] args) throws URISyntaxException, IOException {
+
         Login log=new Login();
         AdminPage adminPage;
         AddAdvertisement advertisement;
         House newHouse;
         HouseFloor newHouseFloor;
         Scanner scan=new Scanner(System.in);
-        Console console = System.console();
+        House updateHouse=new House();
         logger.info("------* Welcome to SAKANCOM system *------");
 
         while (true){
@@ -74,11 +89,14 @@ public class Main {
                     while (true){
                         logger.info("1- See the requests of advertisement to accept or reject it");
                         logger.info("2- See the reservations of houses");
-                        logger.info("3- Log out");
+                        logger.info("3- Update house information");
+                        logger.info("4- Log out");
 
                         String adminChoice= scan.nextLine();
                         if(adminChoice.equals("1")){
                             //open web page
+                            Desktop d=Desktop.getDesktop();
+                            d.browse(new URI("http://localhost/sakancom/table.php"));
                             while (true){
                                 logger.info("1- Enter house id you want to accept its advertisement");
                                 logger.info("2- <-Back");
@@ -105,9 +123,50 @@ public class Main {
                             AdminPage.displayReservations(tenantList);
                         }//if admin 2
                         else if(adminChoice.equals("3")){
+                            displayAllHouses();
+                            logger.info("Enter the ID of the house for updating: ");
+                            String idhouse=scan.nextLine();
+                            if(!House.findHouseId(Integer.parseInt(idhouse))){
+                                updateHouse.unupdatedMsg();
+                                continue;
+                            }
+                            while (true){
+                                logger.info("Choose what do you want to update: ");
+                                logger.info("1- Change Services");
+                                logger.info("2- Change Price");
+                                logger.info("3- Change OwnerID");
+                                logger.info("4- Back");
+
+                                String updateOption=scan.nextLine();
+                                if(updateOption.equals("1")){
+                                    logger.info("The new services of the house you want to update: ");
+                                    String services= scan.nextLine();
+                                    updateHouse.updateInfo("services",services,Integer.parseInt(idhouse));
+                                    updateHouse.updateMsg();
+                                }
+                                else if(updateOption.equals("2")){
+                                    logger.info("The new price of the house you want to update: ");
+                                    String price= scan.nextLine();
+                                    updateHouse.updateInfo("price",Double.parseDouble(price),Integer.parseInt(idhouse));
+                                    updateHouse.updateMsg();
+                                }
+                                else if(updateOption.equals("3")){
+                                    logger.info("The new ownerId of the house you want to update: ");
+                                    String ownerid= scan.nextLine();
+                                    updateHouse.updateInfo("ownerId",Integer.parseInt(ownerid),Integer.parseInt(idhouse));
+                                    updateHouse.updateMsg();
+                                }
+                                else if(updateOption.equals("4")){
+                                   break;
+                                }
+                                else logger.warning(IN_VALID_INPUT);
+                            }
+
+                        }//if admin 3
+                        else if(adminChoice.equals("4")){
                             log.logout();
                             break userPass_loop;
-                        }//if admin 3
+                        }//if admin 4
                         else{
                             logger.warning(IN_VALID_INPUT);
                         }
