@@ -4,6 +4,8 @@ import code.classes.Login;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 
+import java.sql.SQLException;
+
 import static org.junit.Assert.*;
 
 public class LoginT {
@@ -11,6 +13,8 @@ public class LoginT {
     String username, password,user_choice;
     public LoginT() {
         this.obj=new Login();
+        obj.getOwnerID();
+        obj.getOwnerName();
     }
 
     @Given("that the user is not logged in")
@@ -30,18 +34,20 @@ public class LoginT {
         this.user_choice=user_choice;
     }
     @Then("the user login succeeds")
-    public void the_user_login_succeeds() {
+    public void the_user_login_succeeds() throws SQLException {
         obj.logInCheck(this.username,this.password,this.user_choice);
         assertTrue(obj.isLoggedIn());
     }
     @Then("the user will not login")
-    public void the_user_will_not_login() {
+    public void the_user_will_not_login() throws SQLException {
         obj.logInCheck(this.username,this.password,this.user_choice);
         assertFalse(obj.isLoggedIn());
     }
     @Then("show the reason why he can't logged in")
     public void show_the_reason_why_he_can_t_logged_in() {
         obj.reasonFalseLogin();
+        obj.login();
+        obj.logout();
     }
 
 }

@@ -7,6 +7,8 @@ import io.cucumber.java.en.Then;
 import model.classes.House;
 import model.classes.HouseFloor;
 
+import java.sql.SQLException;
+
 import static org.junit.Assert.*;
 
 public class AddHouseT {
@@ -39,7 +41,7 @@ public class AddHouseT {
     }
 
     @Then("the new house will be add to the database in system")
-    public void the_new_house_will_be_add_to_the_database_in_system() {
+    public void the_new_house_will_be_add_to_the_database_in_system() throws SQLException {
         assertNotNull(house);
 
         assertEquals(house.getId(),id_house);
@@ -79,7 +81,7 @@ public class AddHouseT {
     }
 
     @Then("the house will not added to system")
-    public void the_house_will_not_added_to_system() {
+    public void the_house_will_not_added_to_system() throws SQLException {
 //        House.addHouse(house);
         assertFalse(!House.findHouseId(id_house));
 

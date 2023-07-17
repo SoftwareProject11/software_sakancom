@@ -7,6 +7,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import model.classes.HouseFloor;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,12 +28,13 @@ public class OwnerControlPanelT {
     }
 
     @Given("the owner enter the house ID ={int}")
-    public void the_owner_enter_the_house_id(Integer house_idd) {
+    public void the_owner_enter_the_house_id(Integer house_idd) throws SQLException {
         house= OwnerControlPanel.findHouse(house_idd);
+        HouseFloor.findHouseFloorId(house_idd);
     }
 
     @Then("the number of tenants and floors and the id of floors are printed")
-    public void the_number_of_tenants_and_floors_and_the_id_of_floors_are_printed() {
+    public void the_number_of_tenants_and_floors_and_the_id_of_floors_are_printed() throws SQLException {
         OwnerControlPanel.displayNOTenantAndFloors(house);
     }
 
@@ -42,7 +44,7 @@ public class OwnerControlPanelT {
     }
 
     @Given("the owner enter the floor ID ={int}")
-    public void the_owner_enter_the_floor_id(Integer floor_idd) {
+    public void the_owner_enter_the_floor_id(Integer floor_idd) throws SQLException {
         apart=OwnerControlPanel.findFloor(floor_idd);
     }
 
@@ -52,12 +54,12 @@ public class OwnerControlPanelT {
     }
 
     @Given("the owner enter the apartments ID ={int}")
-    public void the_owner_enter_the_apartments_id(Integer apartment_idd) {
+    public void the_owner_enter_the_apartments_id(Integer apartment_idd) throws SQLException {
         house_floor=OwnerControlPanel.findApart(apartment_idd);
     }
 
     @Then("the names of tenants and their communication info, and number of bathrooms, bedrooms, and if it has a balcony are printed")
-    public void the_names_of_tenants_and_their_communication_info_and_number_of_bathrooms_bedrooms_and_if_it_has_a_balcony_are_printed() {
+    public void the_names_of_tenants_and_their_communication_info_and_number_of_bathrooms_bedrooms_and_if_it_has_a_balcony_are_printed() throws SQLException {
         OwnerControlPanel.displayApartInformation(house_floor);
     }
 

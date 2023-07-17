@@ -2,10 +2,7 @@ package model.classes;
 
 import code.classes.Login;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -46,37 +43,37 @@ public class House {
 
 
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setLink(String link) {
-        this.link = link;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public void setServices(String services) {
-        this.services = services;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
-    public void setOwner_id(int owner_id) {
-        this.owner_id = owner_id;
-    }
-
-    public void setNoof_floors(int noof_floors) {
-        this.noof_floors = noof_floors;
-    }
-
-    public void setNoof_tenant(int noof_tenant) {
-        this.noof_tenant = noof_tenant;
-    }
+//    public void setId(int id) {
+//        this.id = id;
+//    }
+//
+//    public void setLink(String link) {
+//        this.link = link;
+//    }
+//
+//    public void setLocation(String location) {
+//        this.location = location;
+//    }
+//
+//    public void setServices(String services) {
+//        this.services = services;
+//    }
+//
+//    public void setPrice(Double price) {
+//        this.price = price;
+//    }
+//
+//    public void setOwner_id(int owner_id) {
+//        this.owner_id = owner_id;
+//    }
+//
+//    public void setNoof_floors(int noof_floors) {
+//        this.noof_floors = noof_floors;
+//    }
+//
+//    public void setNoof_tenant(int noof_tenant) {
+//        this.noof_tenant = noof_tenant;
+//    }
 
     public int getId() {
         return id;
@@ -112,9 +109,9 @@ public class House {
 
 
 
-    public static boolean findHouseId(int idhouse){
+    public static boolean findHouseId(int idhouse) throws SQLException {
         boolean ret=false;
-        try {
+//        try {
             Connection con1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/sakancom", "root", "memesa32002@");
             Statement stmt1 = con1.createStatement();
             ResultSet result1 = stmt1.executeQuery("select idhouse from house");
@@ -124,14 +121,14 @@ public class House {
                     break;
                 }
             }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
         return ret;
     }
 
-    public static void addHouse(House house) {
-        try {
+    public static void addHouse(House house) throws SQLException {
+//        try {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sakancom", "root", "memesa32002@");
             Statement stmt = con.createStatement();
             String insertHouse="INSERT INTO house VALUES('"+house.getId()+"','"+house.getLink()+"','"+house.getLocation()+"','"+house.getServices()+"','"+house.getPrice()+"','"+house.getOwner_id()+"','"+house.getNoof_floors()+"',0)";
@@ -144,9 +141,9 @@ public class House {
 
             con.close();
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
     public static void addHouseInfo(HouseFloor housef) {
         try {
@@ -156,15 +153,15 @@ public class House {
             stmt.executeUpdate(insertHouseInfo);
             logger.info("House's Information added successfully");
 
-            con.close();
+//            con.close();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void updateInfo(String attribute, Object value, Integer house_id) {
-        try {
+    public void updateInfo(String attribute, Object value, Integer house_id) throws SQLException {
+//        try {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sakancom", "root", "memesa32002@");
             Statement stmt = con.createStatement();
 
@@ -185,9 +182,9 @@ public class House {
             con.close();
 
 
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
 
     }
     public void updateMsg() {

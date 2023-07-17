@@ -20,6 +20,7 @@ public class AdminPageT {
     String acceptance;
     List<Tenant> tenant;
 
+
     @Given("the admin logged in")
     public void the_admin_logged_in() {
         obj.login();

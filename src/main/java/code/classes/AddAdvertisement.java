@@ -105,7 +105,7 @@ public class AddAdvertisement {
                         "',  '" + adv.getLocation() +"','" + adv.getServices()+"'," + adv.getRent() + ",'" + adv.getRentNote() + "' ,'" + adv.getPrice() + "','no','')";
                 stmt1.executeUpdate(insertStmt);
                 validH=true;
-                logger.info("The advertisement is added, but waiting Administrator to accept it ");
+
 //                validHouse();
             }
 
@@ -113,7 +113,6 @@ public class AddAdvertisement {
 
 
         }catch (Exception e){
-            e.printStackTrace();
         }
 
     }

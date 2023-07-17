@@ -22,13 +22,13 @@ public class AdminPage {
         return idhouse;
     }
 
-    public void setIdhouse(int idhouse) {
-        this.idhouse = idhouse;
-    }
+//    public void setIdhouse(int idhouse) {
+//        this.idhouse = idhouse;
+//    }
 
-    public void setAcceptance(String acceptance) {
-        this.acceptance = acceptance;
-    }
+//    public void setAcceptance(String acceptance) {
+//        this.acceptance = acceptance;
+//    }
 
     public String getAcceptance() {
         return acceptance;

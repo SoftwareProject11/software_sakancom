@@ -1,9 +1,6 @@
 package code.classes;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.logging.Logger;
 
 public class Login {
@@ -38,9 +35,9 @@ public class Login {
     public void logout() {
         this.isLoggedin = false;
     }
-    public void logInCheck(String username, String password, String user_choice) {
+    public void logInCheck(String username, String password, String user_choice) throws SQLException {
         boolean flag1=false, flag2=false;
-        try {
+//        try {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sakancom","root","memesa32002@");
             Statement stmt=con.createStatement();
             ResultSet result=stmt.executeQuery("select * from admin");
@@ -48,7 +45,6 @@ public class Login {
                 if(result.getString("username").equals(username) && result.getString("password").equals(password) && user_choice.equals("1"))
                 {
                     login();
-                    logger.info("logged in successfully");
                     flag1=true;
                     break;
                 }
@@ -60,7 +56,6 @@ public class Login {
                     if(resTenant.getString("username").equals(username) && resTenant.getString("password").equals(password) && user_choice.equals("2"))
                     {
                         login();
-                        logger.info("logged in successfully");
                         flag2=true;
                         break;
                     }
@@ -75,16 +70,15 @@ public class Login {
                         ownerID=resOwner.getInt("idowner");
                         ownerName=resOwner.getString("name");
                         login();
-                        logger.info("logged in successfully");
                         break;
                     }
                 }
             }
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+//        }
+//        catch (Exception e)
+//        {
+//            e.printStackTrace();
+//        }
 
     }
 

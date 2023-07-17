@@ -9,10 +9,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.io.Console;
 import java.net.URISyntaxException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -22,7 +19,6 @@ import java.util.logging.Logger;
 public class Main {
     private static  Logger logger = Logger.getLogger(Main.class.getName());
     private static final String IN_VALID_INPUT = "Please enter valid input";
-    private static final String BACK = "3- Back";
 
     public static void displayHouses(int ownerID) {
         try {
@@ -51,7 +47,7 @@ public class Main {
                 e.printStackTrace();
             }
     }
-    public static void main(String[] args) throws URISyntaxException, IOException {
+    public static void main(String[] args) throws URISyntaxException, IOException, SQLException {
 
         Login log=new Login();
         AdminPage adminPage;
@@ -84,6 +80,7 @@ public class Main {
                     log.reasonFalseLogin();
                     continue;
                 }
+                logger.info("logged in successfully");
                 if (choice.equals("1")){
                     logger.info("Hello "+username);
                     while (true){
@@ -206,6 +203,7 @@ public class Main {
                             String price=scan.nextLine();
                             advertisement=new AddAdvertisement(Integer.parseInt(houseID),photo,name,contact,location,services,Double.parseDouble(rent),rentNote,Double.parseDouble(price));
                             AddAdvertisement.addAdv(advertisement);
+                            logger.info("The advertisement is added, but waiting Administrator to accept it ");
                             if(!AddAdvertisement.isValidHouse()){
                                 if(AddAdvertisement.isDuplicateHouse){
                                     advertisement.displayReasonSameHouse();
@@ -294,7 +292,7 @@ public class Main {
                     }//owner loop
                 }//choice 3
                 else if (choice.equals("2")) {
-                    
+
                 }
 
 

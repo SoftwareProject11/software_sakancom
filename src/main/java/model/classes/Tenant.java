@@ -4,17 +4,17 @@ import java.util.Date;
 
 public class Tenant {
     private int idtenant;
-    private String username;
-    private String password;
+//    private String username;
+//    private String password;
     private String name;
     private int phone;
     private String email;
     private int id_apart;
-    private Date time_to_pay;
+//    private Date time_to_pay;
     private int id_house;
 
-    public Tenant() {
-    }
+//    public Tenant() {
+//    }
 
     public Tenant(int id_house, int id_apart,int idtenant, String name, int phone, String email ) {
         this.idtenant = idtenant;
@@ -29,13 +29,13 @@ public class Tenant {
         return idtenant;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
+//    public String getUsername() {
+//        return username;
+//    }
+//
+//    public String getPassword() {
+//        return password;
+//    }
 
     public String getName() {
         return name;
@@ -53,9 +53,9 @@ public class Tenant {
         return id_apart;
     }
 
-    public Date getTime_to_pay() {
-        return time_to_pay;
-    }
+//    public Date getTime_to_pay() {
+//        return time_to_pay;
+//    }
 
     public int getId_house() {
         return id_house;

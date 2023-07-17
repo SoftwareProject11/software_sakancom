@@ -13,8 +13,8 @@ public class HouseFloor {
     private int no_bedrooms;
     private String balcony;
 
-    public HouseFloor() {
-    }
+//    public HouseFloor() {
+//    }
 
     public int getId_house() {
         return id_house;
